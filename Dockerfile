@@ -1,18 +1,26 @@
-# Use an official Elixir runtime as a parent image
-FROM elixir:latest
+FROM elixir:1.11.3-alpine
 
-RUN apt-get update && \
-  apt-get install -y postgresql-client
+RUN apk update && apk upgrade && apk add bash \
+  less \
+  inotify-tools \
+  nodejs \
+  npm \
+  postgresql-client
 
-# Create app directory and copy the Elixir projects into it
-RUN mkdir /app
-COPY . /app
-WORKDIR /app
+RUN mix local.hex --force && \
+  mix local.rebar --force
+WORKDIR   /app
 
-# Install hex package manager
-RUN mix local.hex --force
+COPY assets/package.json        ./assets/
+COPY assets/package-lock.json   ./assets/
+RUN npm install --prefix ./assets
 
-# Compile the project
-RUN mix do compile
+COPY mix.exs    .
+COPY mix.lock   .
+ADD config ./config
+RUN mix deps.get
+RUN mix deps.compile
+
+COPY . .
 
 CMD ["/app/entrypoint.sh"]

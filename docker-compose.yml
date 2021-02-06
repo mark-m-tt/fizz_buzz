@@ -4,7 +4,7 @@ version: '3'
 # Containers we are going to run
 services:
   # Our Phoenix container
-  phoenix:
+  fizz_buzz:
     # The build parameters for this container.
     build:
       # Here we define that it should build from the current directory
@@ -23,6 +23,9 @@ services:
     depends_on:
       # The db container needs to be started before we start this container
       - db
+    volumes:
+      - .:/app
+      - /app/assets/node_modules/
   db:
     # We use the predefined Postgres image
     image: postgres:9.6
