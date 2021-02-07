@@ -22,7 +22,7 @@ defmodule FizzBuzzWeb.UserControllerTest do
     test "redirects to show when data is valid", %{conn: conn} do
       conn = post(conn, Routes.user_path(conn, :create), user: @create_attrs)
 
-      assert redirected_to(conn) == Routes.page_path(conn, :index)
+      assert redirected_to(conn) == Routes.home_path(conn, :index)
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -54,7 +54,7 @@ defmodule FizzBuzzWeb.UserControllerTest do
 
     test "redirects when data is valid", %{conn: conn, user: user} do
       conn = put(conn, Routes.user_path(conn, :update, user), user: @update_attrs)
-      assert redirected_to(conn) == Routes.page_path(conn, :index)
+      assert redirected_to(conn) == Routes.home_path(conn, :index)
     end
 
     test "renders errors when data is invalid", %{conn: conn, user: user} do
@@ -77,7 +77,7 @@ defmodule FizzBuzzWeb.UserControllerTest do
 
     test "deletes chosen user", %{conn: conn, user: user} do
       conn = delete(conn, Routes.user_path(conn, :delete, user))
-      assert redirected_to(conn) == Routes.page_path(conn, :index)
+      assert redirected_to(conn) == Routes.home_path(conn, :index)
     end
   end
 

@@ -1,4 +1,4 @@
-defmodule FizzBuzzWeb.PageControllerTest do
+defmodule FizzBuzzWeb.HomeControllerTest do
   use FizzBuzzWeb.ConnCase
 
   test "GET /", %{conn: conn} do

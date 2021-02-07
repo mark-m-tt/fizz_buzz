@@ -16,7 +16,7 @@ defmodule FizzBuzzWeb.Router do
   scope "/", FizzBuzzWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", HomeController, :index
     resources "/accounts", UserController, except: [:index]
     get "/sign-in", SessionController, :new
     post "/sign-in", SessionController, :create

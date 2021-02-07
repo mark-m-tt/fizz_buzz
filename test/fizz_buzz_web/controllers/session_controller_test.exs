@@ -19,7 +19,7 @@ defmodule FizzBuzzWeb.SessionControllerTest do
       with_mock Bcrypt, check_pass: fn user, _password -> {:ok, user} end do
         conn = post(conn, Routes.session_path(conn, :create), session: auth_params(user))
         assert Plug.Conn.get_session(conn, :current_user_id) == user.id
-        assert redirected_to(conn) == Routes.page_path(conn, :index)
+        assert redirected_to(conn) == Routes.home_path(conn, :index)
         assert get_flash(conn, :info) == "Signed in successfully."
       end
     end
@@ -47,7 +47,7 @@ defmodule FizzBuzzWeb.SessionControllerTest do
     test "clears the current_user_id from the conn and redirects to the index page", %{conn: conn} do
       conn = delete(conn, Routes.session_path(conn, :delete))
       assert Plug.Conn.get_session(conn, :current_user_id) == nil
-      assert redirected_to(conn) == Routes.page_path(conn, :index)
+      assert redirected_to(conn) == Routes.home_path(conn, :index)
     end
   end
 

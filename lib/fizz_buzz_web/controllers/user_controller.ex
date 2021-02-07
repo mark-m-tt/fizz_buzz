@@ -15,7 +15,7 @@ defmodule FizzBuzzWeb.UserController do
         conn
         |> put_session(:current_user_id, user.id)
         |> put_flash(:info, "Signed up successfully.")
-        |> redirect(to: Routes.page_path(conn, :index))
+        |> redirect(to: Routes.home_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -40,7 +40,7 @@ defmodule FizzBuzzWeb.UserController do
         {:ok, _user} ->
           conn
           |> put_flash(:info, "User updated successfully.")
-          |> redirect(to: Routes.page_path(conn, :index))
+          |> redirect(to: Routes.home_path(conn, :index))
 
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "edit.html", user: user, changeset: changeset)
@@ -57,7 +57,7 @@ defmodule FizzBuzzWeb.UserController do
 
       conn
       |> put_flash(:info, "User deleted successfully.")
-      |> redirect(to: Routes.page_path(conn, :index))
+      |> redirect(to: Routes.home_path(conn, :index))
     else
       render_not_found(conn)
     end
@@ -69,7 +69,7 @@ defmodule FizzBuzzWeb.UserController do
     conn
     |> put_flash(:warning, "Page not found")
     |> put_status(:not_found)
-    |> put_view(FizzBuzzWeb.PageView)
+    |> put_view(FizzBuzzWeb.HomeView)
     |> render("index.html")
   end
 end

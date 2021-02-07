@@ -1,4 +1,4 @@
-defmodule FizzBuzzWeb.PageController do
+defmodule FizzBuzzWeb.HomeController do
   use FizzBuzzWeb, :controller
 
   def index(conn, _params) do
