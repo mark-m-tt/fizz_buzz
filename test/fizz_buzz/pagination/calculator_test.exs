@@ -15,8 +15,8 @@ defmodule FizzBuzz.Pagination.CalculatorTest do
                   first_index: 0,
                   page_size: 1
                 }}
-
     end
+
     test "it returns correct values when requesting the first page" do
       valid_result = result(item_count: 100_000_000_000, page_size: 100, current_page: 1)
 
@@ -26,6 +26,32 @@ defmodule FizzBuzz.Pagination.CalculatorTest do
                   current_page: 1,
                   total_pages: 1_000_000_000,
                   first_index: 0,
+                  page_size: 100
+                }}
+    end
+
+    test "it returns correct values when requesting the second page" do
+      valid_result = result(item_count: 100_000_000_000, page_size: 100, current_page: 2)
+
+      assert valid_result ==
+               {:ok,
+                %Result{
+                  current_page: 2,
+                  total_pages: 1_000_000_000,
+                  first_index: 100,
+                  page_size: 100
+                }}
+    end
+
+    test "it returns correct values when requesting page number 1000" do
+      valid_result = result(item_count: 100_000_000_000, page_size: 100, current_page: 1_000)
+
+      assert valid_result ==
+               {:ok,
+                %Result{
+                  current_page: 1_000,
+                  total_pages: 1_000_000_000,
+                  first_index: 99_900,
                   page_size: 100
                 }}
     end
@@ -52,11 +78,7 @@ defmodule FizzBuzz.Pagination.CalculatorTest do
   end
 
   defp result(item_count: item_count, page_size: page_size, current_page: current_page) do
-    Calculator.perform(%Calculator{
-      item_count: item_count,
-      page_size: page_size,
-      current_page: current_page
-    })
+    Calculator.perform(item_count: item_count, page_size: page_size, current_page: current_page)
   end
 
   def no_results_tuple, do: {:error, "The requested page has no results"}

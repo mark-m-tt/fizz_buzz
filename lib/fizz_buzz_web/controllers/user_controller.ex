@@ -63,9 +63,7 @@ defmodule FizzBuzzWeb.UserController do
     end
   end
 
-  defp correct_user_is_logged_in?(conn, id) do
-    to_string(current_user_id(conn)) == id
-  end
+  defp correct_user_is_logged_in?(conn, id), do: to_string(current_user_id(conn)) == id
 
   defp render_not_found(conn) do
     conn
