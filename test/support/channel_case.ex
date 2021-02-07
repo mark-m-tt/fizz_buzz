@@ -17,6 +17,8 @@ defmodule FizzBuzzWeb.ChannelCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
       # Import conveniences for testing with channels
@@ -29,10 +31,10 @@ defmodule FizzBuzzWeb.ChannelCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(FizzBuzz.Repo)
+    :ok = Sandbox.checkout(FizzBuzz.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(FizzBuzz.Repo, {:shared, self()})
+      Sandbox.mode(FizzBuzz.Repo, {:shared, self()})
     end
 
     :ok

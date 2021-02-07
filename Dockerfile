@@ -1,8 +1,10 @@
 FROM elixir:1.11.3-alpine
 
 RUN apk update && apk upgrade && apk add bash \
+  build-base \
   less \
   inotify-tools \
+  make \
   nodejs \
   npm \
   postgresql-client

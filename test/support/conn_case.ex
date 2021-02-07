@@ -17,6 +17,8 @@ defmodule FizzBuzzWeb.ConnCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
       # Import conveniences for testing with connections
@@ -32,10 +34,10 @@ defmodule FizzBuzzWeb.ConnCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(FizzBuzz.Repo)
+    :ok = Sandbox.checkout(FizzBuzz.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(FizzBuzz.Repo, {:shared, self()})
+      Sandbox.mode(FizzBuzz.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

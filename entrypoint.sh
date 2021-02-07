@@ -19,4 +19,4 @@ else
   mix ecto.migrate
 fi
 
-exec mix phx.server
+exec iex -S mix phx.server
