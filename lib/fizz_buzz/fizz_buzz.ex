@@ -6,9 +6,16 @@ defmodule FizzBuzz.FizzBuzz do
 
   defstruct [:number, :string]
 
+  def perform(starting_number: index, count: _count) when index <= 0,
+    do: {:error, "must be a positive starting number"}
+
+  def perform(starting_number: _index, count: count) when count <= 0,
+    do: {:error, "must be a positive count"}
+
   def perform(starting_number: index, count: count) do
-    index..(index + count - 1)
-    |> Enum.map(fn number -> %FizzBuzz.FizzBuzz{number: number, string: buzz(number)} end)
+    {:ok,
+     index..(index + count - 1)
+     |> Enum.map(fn number -> %FizzBuzz.FizzBuzz{number: number, string: buzz(number)} end)}
   end
 
   defp buzz(number) when rem(number, 15) == 0, do: "fizzbuzz"

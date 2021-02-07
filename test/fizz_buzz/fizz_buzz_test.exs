@@ -5,15 +5,18 @@ defmodule FizzBuzz.FizzBuzzTest do
 
   describe "perform/1" do
     test "returns fizz for the number 3" do
-      assert perform(starting_number: 3, count: 1) == [%FizzBuzz{number: 3, string: "fizz"}]
+      assert perform(starting_number: 3, count: 1) ==
+               {:ok, [%FizzBuzz{number: 3, string: "fizz"}]}
     end
 
     test "returns buzz for the number 5" do
-      assert perform(starting_number: 5, count: 1) == [%FizzBuzz{number: 5, string: "buzz"}]
+      assert perform(starting_number: 5, count: 1) ==
+               {:ok, [%FizzBuzz{number: 5, string: "buzz"}]}
     end
 
     test "returns fizzbuzz for the number 15" do
-      assert perform(starting_number: 15, count: 1) == [%FizzBuzz{number: 15, string: "fizzbuzz"}]
+      assert perform(starting_number: 15, count: 1) ==
+               {:ok, [%FizzBuzz{number: 15, string: "fizzbuzz"}]}
     end
 
     test "returns the integer as a string for all other numbers" do
@@ -23,7 +26,27 @@ defmodule FizzBuzz.FizzBuzzTest do
           %FizzBuzz{number: number, string: string}
         end)
 
-      assert perform(starting_number: 1, count: 30) == expected_results
+      assert perform(starting_number: 1, count: 30) == {:ok, expected_results}
+    end
+
+    test "returns an error tuple if the starting number is negative" do
+      assert perform(starting_number: -1, count: 10) ==
+               error_tuple(message: "must be a positive starting number")
+    end
+
+    test "returns an error tuple if the starting number is 0" do
+      assert perform(starting_number: 0, count: 10) ==
+               error_tuple(message: "must be a positive starting number")
+    end
+
+    test "returns an error tuple if the count is negative" do
+      assert perform(starting_number: 1, count: -1) ==
+               error_tuple(message: "must be a positive count")
+    end
+
+    test "returns an error tuple if the count is 0" do
+      assert perform(starting_number: 1, count: 0) ==
+               error_tuple(message: "must be a positive count")
     end
   end
 
@@ -64,5 +87,9 @@ defmodule FizzBuzz.FizzBuzzTest do
       [29, "29"],
       [30, "fizzbuzz"]
     ]
+  end
+
+  def error_tuple(message: message) do
+    {:error, message}
   end
 end
