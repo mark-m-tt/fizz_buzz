@@ -25,7 +25,7 @@ defmodule FizzBuzzWeb do
       import FizzBuzzWeb.Gettext
 
       import FizzBuzzWeb.Helpers.Auth,
-        only: [current_user_id: 1]
+        only: [current_user_id: 1, current_user: 1]
 
       import FizzBuzzWeb.Helpers.ControllerHelpers,
         only: [default_fizz_buzz_list: 0, default_calculator: 0]
@@ -46,6 +46,9 @@ defmodule FizzBuzzWeb do
 
       import FizzBuzzWeb.Helpers.Auth,
         only: [signed_in?: 1, current_user: 1]
+
+      import FizzBuzzWeb.Helpers.ViewHelpers,
+        only: [number_is_favourited?: 2, favourite_for_number: 2]
 
       # Include shared imports and aliases for views
       unquote(view_helpers())

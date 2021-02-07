@@ -9,6 +9,7 @@ defmodule FizzBuzz.Accounts.User do
   schema "users" do
     field :encrypted_password, :string
     field :username, :string
+    has_many :favourites, FizzBuzz.Accounts.Favourite
 
     timestamps()
   end

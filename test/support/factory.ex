@@ -6,7 +6,7 @@ defmodule FizzBuzz.Factory do
 
   def user_factory do
     %FizzBuzz.Accounts.User{
-      username: "some username",
+      username: ExMachina.sequence("some username"),
       encrypted_password: "Some encrypted password"
     }
   end

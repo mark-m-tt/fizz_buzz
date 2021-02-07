@@ -1,0 +1,19 @@
+  <tr>
+  
+  <div class="row">
+    <td><%= @item.string %></td>
+    <%= if signed_in?(@conn) do %>
+      <%= if number_is_favourited?(@item.number, @favourites) do %>
+        <td><%= "Yes" %></td>
+        <td><%= button "Remove favourite", to: Routes.favourite_path(@conn, :delete, favourite_for_number(@item.number, @favourites)), method: :delete, data: [confirm: "Are you sure?"] %></td>
+      <% else %>
+        <td><%= "No" %></td>
+        <td><%= form_for :favourite, Routes.favourite_path(@conn, :create), fn f -> %>
+          <%= hidden_input f, :user_id, value: current_user(@conn).id %>
+          <%= hidden_input f, :number, value: @item.number %>
+          <%= submit "Make favourite!" %>
+        <% end %></td>
+      <% end %>
+    <% end %>
+  </div>
+</tr>
