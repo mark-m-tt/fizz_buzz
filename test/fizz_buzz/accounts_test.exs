@@ -70,4 +70,29 @@ defmodule FizzBuzz.AccountsTest do
       assert Accounts.get_by_username("user") == user
     end
   end
+
+  describe "favourites" do
+    alias FizzBuzz.Accounts.Favourite
+
+    @valid_attrs %{user_id: 1, number: 1}
+    @invalid_attrs %{user_id: 1, number: nil}
+
+    def favourite_fixture do
+      insert(:favourite)
+    end
+
+    test "create_favourite/1 with valid data creates a favourite" do
+      insert(:user, id: 1)
+      assert {:ok, %Favourite{} = _favourite} = Accounts.create_favourite(@valid_attrs)
+    end
+
+    test "create_favourite/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_favourite(@invalid_attrs)
+    end
+
+    test "delete_favourite/1 deletes the favourite" do
+      favourite = favourite_fixture()
+      assert {:ok, %Favourite{}} = Accounts.delete_favourite(favourite)
+    end
+  end
 end

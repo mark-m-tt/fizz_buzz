@@ -10,4 +10,11 @@ defmodule FizzBuzz.Factory do
       encrypted_password: "Some encrypted password"
     }
   end
+
+  def favourite_factory do
+    %FizzBuzz.Accounts.Favourite{
+      number: 1,
+      user: build(:user)
+    }
+  end
 end

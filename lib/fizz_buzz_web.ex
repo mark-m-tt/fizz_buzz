@@ -27,6 +27,9 @@ defmodule FizzBuzzWeb do
       import FizzBuzzWeb.Helpers.Auth,
         only: [current_user_id: 1]
 
+      import FizzBuzzWeb.Helpers.ControllerHelpers,
+        only: [default_fizz_buzz_list: 0, default_calculator: 0]
+
       alias FizzBuzzWeb.Router.Helpers, as: Routes
     end
   end

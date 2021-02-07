@@ -18,6 +18,10 @@ defmodule FizzBuzz.FizzBuzz do
      |> Enum.map(fn number -> %FizzBuzz.FizzBuzz{number: number, string: buzz(number)} end)}
   end
 
+  def default_list do
+    perform(starting_number: 1, count: 100)
+  end
+
   defp buzz(number) when rem(number, 15) == 0, do: "fizzbuzz"
   defp buzz(number) when rem(number, 5) == 0, do: "buzz"
   defp buzz(number) when rem(number, 3) == 0, do: "fizz"

@@ -5,20 +5,24 @@ defmodule FizzBuzz.Pagination.Calculator do
   struct.
   """
 
-  defstruct [:item_count, :page_size, :current_page]
-
-  def perform(item_count: item_count, page_size: page_size, current_page: current_page) do
-    if index_out_of_range?(item_count, page_size, current_page) do
+  def perform(item_count: item_count, page_size: page_size, page_number: page_number) do
+    if index_out_of_range?(item_count, page_size, page_number) do
       {:error, "The requested page has no results"}
     else
-      {:ok, results(item_count, page_size, current_page)}
+      {:ok, results(item_count, page_size, page_number)}
     end
   end
 
-  defp first_index(page_size, current_page), do: page_size * (current_page - 1)
+  def default_calculator, do: perform(item_count: 100_000_000_000, page_size: 100, page_number: 1)
 
-  defp index_out_of_range?(item_count, page_size, current_page) do
-    index = first_index(page_size, current_page)
+  defp first_index(_page_size, 1), do: 0
+
+  defp first_index(page_size, page_number) do
+    page_size * (page_number - 1)
+  end
+
+  defp index_out_of_range?(item_count, page_size, page_number) do
+    index = first_index(page_size, page_number)
     index < 0 or index > item_count - 1
   end
 
@@ -27,10 +31,10 @@ defmodule FizzBuzz.Pagination.Calculator do
 
   defp page_count(item_count, page_size), do: div(item_count, page_size) + 1
 
-  defp results(item_count, page_size, current_page) do
+  defp results(item_count, page_size, page_number) do
     %FizzBuzz.Pagination.Result{
-      current_page: current_page,
-      first_index: first_index(page_size, current_page),
+      page_number: page_number,
+      first_index: first_index(page_size, page_number),
       total_pages: page_count(item_count, page_size),
       page_size: page_size
     }

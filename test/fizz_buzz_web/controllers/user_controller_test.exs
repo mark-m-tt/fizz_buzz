@@ -81,7 +81,7 @@ defmodule FizzBuzzWeb.UserControllerTest do
     end
   end
 
-  describe "delete user when the correct user is not logged in" do
+  describe "does not delete user when the correct user is not logged in" do
     setup [:create_user]
 
     test "deletes chosen user", %{conn: conn, user: user} do

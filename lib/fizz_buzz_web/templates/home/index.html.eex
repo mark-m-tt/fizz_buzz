@@ -3,5 +3,14 @@
   <p>Putting the buzz in the fizz</p>
 </section>
 
-<section class="row">
-</section>
+<%= for item <- @list do %>
+  <%= item.string %>
+<% end %>
+
+<%= form_for @conn, "/", [method: :get],  fn f -> %>
+      <%= label f, :page_size %>
+      <%= number_input f, :page_size, value: @calculator.page_size %>
+      <%= label f, :jump_to_page %>
+      <%= number_input f, :page_number, value: @calculator.page_number %>
+      <%= submit "Go!" %>
+<% end %>

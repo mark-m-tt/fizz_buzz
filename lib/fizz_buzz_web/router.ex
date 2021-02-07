@@ -18,6 +18,7 @@ defmodule FizzBuzzWeb.Router do
 
     get "/", HomeController, :index
     resources "/accounts", UserController, except: [:index]
+    resources "/favourites", FavouriteController, only: [:create, :delete]
     get "/sign-in", SessionController, :new
     post "/sign-in", SessionController, :create
     delete "/sign-out", SessionController, :delete
