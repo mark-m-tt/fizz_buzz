@@ -1,0 +1,8 @@
+# loading ENV vars
+gem 'dotenv'
+
+# Code formatting. Read more: https://github.com/rubocop-hq/rubocop
+gem 'rubocop'
+
+# performing HTTP requests. Read more: https://github.com/jnunemaker/httparty
+gem 'httparty'
