@@ -30,6 +30,8 @@ config :fizz_buzz, FizzBuzzWeb.Endpoint,
   ],
   secret_key_base: secret_key_base
 
+config :fizz_buzz, max_size: 100_000_000_000
+
 # ## Using releases (Elixir v1.9+)
 #
 # If you are doing OTP releases, you need to instruct Phoenix

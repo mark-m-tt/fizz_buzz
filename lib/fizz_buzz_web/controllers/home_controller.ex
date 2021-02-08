@@ -38,7 +38,7 @@ defmodule FizzBuzzWeb.HomeController do
 
   defp pagination_calculator(page_size: page_size, page_number: page_number) do
     Calculator.perform(
-      item_count: 100_000_000_000,
+      item_count: max_page_size(),
       page_size: page_size,
       page_number: page_number
     )
@@ -52,4 +52,6 @@ defmodule FizzBuzzWeb.HomeController do
   end
 
   defp int(string), do: String.to_integer(string)
+
+  defp max_page_size, do: Application.get_env(:fizz_buzz, :max_size)
 end

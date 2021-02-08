@@ -17,7 +17,9 @@ defmodule FizzBuzz.Accounts.Favourite do
     favourite
     |> cast(attrs, [:number, :user_id])
     |> validate_required([:number, :user_id])
-    |> validate_inclusion(:number, 1..100_000_000_000)
+    |> validate_inclusion(:number, 1..max_page_size())
     |> unique_constraint(:number_user_id)
   end
+
+  defp max_page_size, do: Application.get_env(:fizz_buzz, :max_size)
 end

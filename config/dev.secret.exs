@@ -8,3 +8,5 @@ config :fizz_buzz, FizzBuzz.Repo,
 
 config :fizz_buzz, FizzBuzz.Guardian,
   secret_key: "nMKsPXThtfIEaf7VVgJ6buuifgOBl0r2eEmorvKFubn3LktNtf/UWhC88YssgXvV"
+
+config :fizz_buzz, max_size: 100_000_000_000

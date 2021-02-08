@@ -13,7 +13,7 @@ defmodule FizzBuzz.Pagination.Calculator do
     end
   end
 
-  def default_calculator, do: perform(item_count: 100_000_000_000, page_size: 100, page_number: 1)
+  def default_calculator, do: perform(item_count: max_page_size(), page_size: 100, page_number: 1)
 
   defp first_index(_page_size, 1), do: 0
 
@@ -39,4 +39,6 @@ defmodule FizzBuzz.Pagination.Calculator do
       page_size: page_size
     }
   end
+
+  defp max_page_size, do: Application.get_env(:fizz_buzz, :max_size)
 end
