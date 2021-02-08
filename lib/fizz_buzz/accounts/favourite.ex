@@ -17,5 +17,7 @@ defmodule FizzBuzz.Accounts.Favourite do
     favourite
     |> cast(attrs, [:number, :user_id])
     |> validate_required([:number, :user_id])
+    |> validate_inclusion(:number, 1..100_000_000_000)
+    |> unique_constraint(:number_user_id)
   end
 end

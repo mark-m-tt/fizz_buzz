@@ -103,5 +103,10 @@ defmodule FizzBuzz.AccountsTest do
       favourite = favourite_fixture()
       assert {:ok, %Favourite{}} = Accounts.delete_favourite(favourite)
     end
+
+    test "get_favourite_by_number/2 finds the favourite" do
+      favourite = favourite_fixture()
+      assert favourite == Accounts.get_favourite_by_number(favourite.number, favourite.user_id)
+    end
   end
 end

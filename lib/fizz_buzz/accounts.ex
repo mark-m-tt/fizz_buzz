@@ -127,6 +127,13 @@ defmodule FizzBuzz.Accounts do
 
   """
   def get_favourite!(id), do: Repo.get!(Favourite, id)
+  def get_favourite(id), do: Repo.get(Favourite, id)
+
+  def get_favourite_by_number(number, user_id) do
+    Favourite
+    |> preload(:user)
+    |> Repo.get_by(number: number, user_id: user_id)
+  end
 
   @doc """
   Creates a favourite.

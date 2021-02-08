@@ -1,6 +1,8 @@
 defmodule FizzBuzzWeb.Router do
   use FizzBuzzWeb, :router
 
+  alias FizzBuzz.Guardian
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -12,6 +14,10 @@ defmodule FizzBuzzWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
     plug :put_secure_browser_headers
+  end
+
+  pipeline :jwt_authenticated do
+    plug Guardian.AuthPipeline
   end
 
   scope "/", FizzBuzzWeb do
@@ -31,5 +37,16 @@ defmodule FizzBuzzWeb.Router do
     post "/sign-up", Api.UserController, :create, as: :api_user
     post "/sign-in", Api.SessionController, :create, as: :api_session
     get "/", Api.HomeController, :play_fizz_buzz, as: :api_fizz_buzz
+  end
+
+  scope "/api/v1", FizzBuzzWeb do
+    pipe_through [:api, :jwt_authenticated]
+
+    resources "/favourites", Api.FavouriteController,
+      only: [:create, :delete, :index, :show],
+      as: :api_favourite
+
+    get "/favourites/find_by_number/:number", Api.FavouriteController, :find_by_number,
+      as: :api_favourite_by_number
   end
 end
