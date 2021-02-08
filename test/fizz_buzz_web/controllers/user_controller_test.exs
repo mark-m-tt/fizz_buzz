@@ -4,12 +4,21 @@ defmodule FizzBuzzWeb.UserControllerTest do
 
   import FizzBuzz.Factory
 
-  @create_attrs %{encrypted_password: "some encrypted_password", username: "some username"}
+  @create_attrs %{
+    password: "some password",
+    password_confirmation: "some password",
+    username: "some username"
+  }
   @update_attrs %{
-    encrypted_password: "some updated encrypted_password",
+    password: "some updated password",
+    password_confirmation: "some updated password",
     username: "some updated username"
   }
-  @invalid_attrs %{encrypted_password: nil, username: nil}
+  @invalid_attrs %{
+    password: "nil",
+    password_confirmation: nil,
+    username: nil
+  }
 
   describe "new user" do
     test "renders form", %{conn: conn} do

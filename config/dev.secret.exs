@@ -5,3 +5,6 @@ config :fizz_buzz, FizzBuzz.Repo,
   password: "postgres",
   database: "fizz_buzz_dev",
   hostname: "db"
+
+config :fizz_buzz, FizzBuzz.Guardian,
+  secret_key: "nMKsPXThtfIEaf7VVgJ6buuifgOBl0r2eEmorvKFubn3LktNtf/UWhC88YssgXvV"

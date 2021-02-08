@@ -4,7 +4,8 @@ defmodule FizzBuzz.Repo.Migrations.CreateUsers do
   def change do
     create table(:users) do
       add :username, :string
-      add :encrypted_password, :string
+      add :password, :string
+      add :password_confirmation, :string
 
       timestamps()
     end

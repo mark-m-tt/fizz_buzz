@@ -57,11 +57,7 @@ defmodule FizzBuzzWeb.UserController do
 
       conn
       |> put_flash(:info, "User deleted successfully.")
-      |> redirect(
-        to: Routes.home_path(conn, :index),
-        list: default_fizz_buzz_list,
-        calculator: default_calculator
-      )
+      |> redirect(to: Routes.home_path(conn, :index))
     else
       render_not_found(conn)
     end

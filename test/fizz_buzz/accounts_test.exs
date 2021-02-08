@@ -8,12 +8,21 @@ defmodule FizzBuzz.AccountsTest do
   describe "users" do
     alias FizzBuzz.Accounts.User
 
-    @valid_attrs %{encrypted_password: "some encrypted_password", username: "some username"}
+    @valid_user_attrs %{
+      password: "some password",
+      password_confirmation: "some password",
+      username: "some username"
+    }
+
     @update_attrs %{
-      encrypted_password: "some updated encrypted_password",
+      password: "some updated password",
+      password_confirmation: "some updated password",
       username: "some updated username"
     }
-    @invalid_attrs %{encrypted_password: nil, username: nil}
+
+    @invalid_attrs %{
+      username: 5
+    }
 
     def user_fixture(attrs \\ %{}) do
       insert(:user, attrs)
@@ -30,7 +39,7 @@ defmodule FizzBuzz.AccountsTest do
     end
 
     test "create_user/1 with valid data creates a user" do
-      assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
+      assert {:ok, %User{} = user} = Accounts.create_user(@valid_user_attrs)
       assert user.username == "some username"
     end
 

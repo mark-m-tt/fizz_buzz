@@ -7,7 +7,8 @@ defmodule FizzBuzz.Accounts.User do
   alias Comeonin.Bcrypt
 
   schema "users" do
-    field :encrypted_password, :string
+    field :password, :string
+    field :password_confirmation, :string
     field :username, :string
     has_many :favourites, FizzBuzz.Accounts.Favourite
 
@@ -17,9 +18,11 @@ defmodule FizzBuzz.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:username, :encrypted_password])
+    |> cast(attrs, [:username, :password, :password_confirmation])
+    |> validate_length(:password, min: 8)
+    |> validate_required(:password_confirmation)
     |> unique_constraint(:username)
-    |> validate_required([:username, :encrypted_password])
-    |> update_change(:encrypted_password, &Bcrypt.hashpwsalt/1)
+    |> validate_confirmation(:password, message: "does not match password!")
+    |> update_change(:password, &Bcrypt.hashpwsalt/1)
   end
 end

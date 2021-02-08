@@ -39,6 +39,7 @@ defmodule FizzBuzz.MixProject do
       {:ecto_sql, "~> 3.4"},
       {:ex_machina, "~> 2.4", only: :test},
       {:gettext, "~> 0.11"},
+      {:guardian, "~> 1.0"},
       {:jason, "~> 1.0"},
       {:mock, "~> 0.3.0", only: :test},
       {:phoenix, "~> 1.5.3"},
