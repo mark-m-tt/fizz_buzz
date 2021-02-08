@@ -1,11 +1,11 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     FizzBuzz.Repo.insert!(%FizzBuzz.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+# Create a default user with some favourites
+
+alias FizzBuzz.Repo
+alias FizzBuzz.Accounts
+
+attrs = %{username: "username", password: "password", password_confirmation: "password"}
+user = %Accounts.User{} |> Accounts.User.changeset(attrs) |> Repo.insert!
+
+Enum.each([3, 5, 10], fn number ->
+  %Accounts.Favourite{} |> Accounts.Favourite.changeset(%{number: number, user_id: user.id}) |> Repo.insert!
+end)
