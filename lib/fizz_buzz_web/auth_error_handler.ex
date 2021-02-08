@@ -1,4 +1,4 @@
-defmodule MyApi.AuthErrorHandler do
+defmodule FizzBuzzWeb.AuthErrorHandler do
   @moduledoc false
   import Plug.Conn
 

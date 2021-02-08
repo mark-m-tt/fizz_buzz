@@ -22,6 +22,10 @@ defmodule FizzBuzzWeb.Helpers.Auth do
     Plug.Conn.get_session(conn, :current_user_id)
   end
 
+  def user_from_jwt(conn) do
+    Guardian.Plug.current_resource(conn) |> FizzBuzz.Repo.preload(:favourites)
+  end
+
   defp id_present?(nil), do: false
   defp id_present?(_id), do: true
 end

@@ -8,11 +8,11 @@ defmodule FizzBuzzWeb.Api.FavouriteController do
   def index(conn, _params) do
     conn
     |> put_status(200)
-    |> render("index.json", favourites: user(conn).favourites)
+    |> render("index.json", favourites: user_from_jwt(conn).favourites)
   end
 
   def create(conn, %{"number" => number}) do
-    params = %{user_id: user(conn).id, number: number}
+    params = %{user_id: user_from_jwt(conn).id, number: number}
 
     case Accounts.create_favourite(params) do
       {:ok, favourite} ->
@@ -29,7 +29,7 @@ defmodule FizzBuzzWeb.Api.FavouriteController do
   end
 
   def find_by_number(conn, %{"number" => number}) do
-    case Accounts.get_favourite_by_number(number, user(conn).id) do
+    case Accounts.get_favourite_by_number(number, user_from_jwt(conn).id) do
       favourite = %Accounts.Favourite{} ->
         conn
         |> put_status(:ok)
@@ -46,7 +46,7 @@ defmodule FizzBuzzWeb.Api.FavouriteController do
   def show(conn, %{"id" => id}) do
     case Accounts.get_favourite(id) do
       favourite = %Accounts.Favourite{} ->
-        if favourite.user_id == user(conn).id do
+        if favourite.user_id == user_from_jwt(conn).id do
           conn
           |> put_status(:ok)
           |> render("show.json", favourite: favourite)
@@ -62,12 +62,12 @@ defmodule FizzBuzzWeb.Api.FavouriteController do
   def delete(conn, %{"id" => id}) do
     case Accounts.get_favourite(id) do
       favourite = %Accounts.Favourite{} ->
-        if user(conn).id == favourite.user_id do
+        if user_from_jwt(conn).id == favourite.user_id do
           Accounts.delete_favourite(favourite)
 
           conn
           |> put_status(204)
-          |> render("index.json", favourites: user(conn).favourites)
+          |> render("index.json", favourites: user_from_jwt(conn).favourites)
         else
           render_not_found(conn)
         end
@@ -75,10 +75,6 @@ defmodule FizzBuzzWeb.Api.FavouriteController do
       nil ->
         render_not_found(conn)
     end
-  end
-
-  defp user(conn) do
-    Guardian.Plug.current_resource(conn) |> Repo.preload(:favourites)
   end
 
   defp render_not_found(conn) do

@@ -1,6 +1,4 @@
 defmodule FizzBuzzWeb.Api.FavouriteView do
-  # code omitted for brevity
-
   def render("index.json", %{favourites: favourites}) do
     %{
       favourites: Enum.map(favourites, fn favourite -> favourite_json(favourite) end)

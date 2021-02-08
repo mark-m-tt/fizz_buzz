@@ -25,7 +25,7 @@ defmodule FizzBuzzWeb do
       import FizzBuzzWeb.Gettext
 
       import FizzBuzzWeb.Helpers.Auth,
-        only: [current_user_id: 1, current_user: 1]
+        only: [current_user_id: 1, current_user: 1, user_from_jwt: 1]
 
       import FizzBuzzWeb.Helpers.ControllerHelpers,
         only: [default_fizz_buzz_list: 0, default_calculator: 0]
