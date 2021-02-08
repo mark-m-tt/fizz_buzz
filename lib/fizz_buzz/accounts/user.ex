@@ -24,5 +24,6 @@ defmodule FizzBuzz.Accounts.User do
     |> unique_constraint(:username)
     |> validate_confirmation(:password, message: "does not match password!")
     |> update_change(:password, &Bcrypt.hashpwsalt/1)
+    |> put_change(:password_confirmation, "")
   end
 end

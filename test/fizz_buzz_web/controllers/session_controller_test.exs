@@ -16,7 +16,7 @@ defmodule FizzBuzzWeb.SessionControllerTest do
     end
 
     test "it signs in the user if the password is correct", %{conn: conn, user: user} do
-      with_mock Bcrypt, check_pass: fn user, _password -> {:ok, user} end do
+      with_mock Bcrypt, check_pass: fn user, _password, _options -> {:ok, user} end do
         conn = post(conn, Routes.session_path(conn, :create), session: auth_params(user))
         assert Plug.Conn.get_session(conn, :current_user_id) == user.id
         assert redirected_to(conn) == Routes.home_path(conn, :index)
@@ -28,7 +28,7 @@ defmodule FizzBuzzWeb.SessionControllerTest do
       conn: conn,
       user: user
     } do
-      with_mock Bcrypt, check_pass: fn _user, _password -> {:error, ""} end do
+      with_mock Bcrypt, check_pass: fn _user, _password, _options -> {:error, ""} end do
         conn = post(conn, Routes.session_path(conn, :create), session: auth_params(user))
         assert Plug.Conn.get_session(conn, :current_user_id) == nil
         assert html_response(conn, 200) =~ "Sign in"

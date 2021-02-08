@@ -1,6 +1,7 @@
 defmodule FizzBuzzWeb.SessionController do
   use FizzBuzzWeb, :controller
 
+  alias Comeonin.Bcrypt
   alias FizzBuzz.Accounts
 
   def new(conn, _params) do
@@ -10,7 +11,7 @@ defmodule FizzBuzzWeb.SessionController do
   def create(conn, %{"session" => auth_params}) do
     user = Accounts.get_by_username(auth_params["username"])
 
-    case Comeonin.Bcrypt.check_pass(user, auth_params["password"]) do
+    case Bcrypt.check_pass(user, auth_params["password"], hash_key: :password) do
       {:ok, user} ->
         conn
         |> put_session(:current_user_id, user.id)
