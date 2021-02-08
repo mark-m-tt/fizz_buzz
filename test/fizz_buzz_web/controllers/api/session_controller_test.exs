@@ -28,5 +28,18 @@ defmodule FizzBuzzWeb.Api.SessionControllerTest do
         assert json_response(conn, 200)["jwt"] != nil
       end
     end
+
+    test "it returns a 401 when not given a valid username and password", %{
+      conn: conn
+    } do
+      with_mock Bcrypt, check_pass: fn _user, _password, _options -> {:error, ""} end do
+        conn =
+          post(conn, Routes.api_session_path(conn, :create),
+            session: %{username: "", password: ""}
+          )
+
+        assert json_response(conn, 401)
+      end
+    end
   end
 end
