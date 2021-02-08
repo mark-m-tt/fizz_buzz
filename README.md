@@ -41,8 +41,9 @@ Failure to do this will result in a 401 response
 |GET|api/v1/favourites/find_by_number/:number|-|200 or 404|scoped to the JWT's account
 
 ### Running the API Client
-- The API client can be run from within IRB. To load a session, from the root of the project, run:
-- `$ irb -r ./client/client.rb`
+- After bringing up the main project with docker-compose up, run
+- `$ docker exec -it fizz_buzz_client_1 irb -r ./client.rb`
+- This will bring you into an interactive irb session, and allow you to execute the following commands
  
 ### API Client methods
 | Command | Arguments | Description |

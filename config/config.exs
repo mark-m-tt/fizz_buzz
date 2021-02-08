@@ -12,7 +12,7 @@ config :fizz_buzz,
 
 # Configures the endpoint
 config :fizz_buzz, FizzBuzzWeb.Endpoint,
-  url: [host: "localhost"],
+  http: [ip: {0,0,0,0}],
   secret_key_base: "glii7PvBDNFA72CoXLzWSTbK67756nIHL3fSrO3YzM5E0BFCzesGjrOAKA5Wslnz",
   render_errors: [view: FizzBuzzWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: FizzBuzz.PubSub,

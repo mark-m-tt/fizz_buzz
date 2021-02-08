@@ -2,4 +2,4 @@
 
 bundle install
 
-exec irb -r ./config.rb
+exec bundle exec irb -r ./client.rb
