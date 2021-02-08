@@ -11,14 +11,9 @@ Welcome to my Fizz Buzz application!
  - Head to localhost:4000
 
 ### Features of the browser app
-- Create your account and start fizzbuzzing!
+- Create your account or login with the seeded account (username and password are username and password) and start fizzbuzzing!
 - Page number and page size can be set from localhost:4000/
 - Add and remove your favourite numbers
-
-### Running tests and linters
- - `$ docker-compose run phoenix bash`
- - And then from within the container:
- - `$ mix format; mix credo --strict; mix test`
 
 ### API Endpoints
 #### Unauthenticated
@@ -77,3 +72,26 @@ irb(main):010:0> client.list_favourites
     => {"favourites"=>[{"id"=>x, "number"=>2, "user_id"=>x}]
 ```
 
+### Running tests and linters
+
+##### API Tests
+ - `$ docker-compose run phoenix bash` from the project root
+ - And then from within the container:
+ - `$ mix format`
+ - `$ mix credo --strict`
+ - `$ mix test`
+#### Client Tests
+- `$ docker-compose run client bash` from the project root
+- And then from within the container
+- `$ rubocop`
+- `$ rspec`
+
+### Notes
+- Secrets and Env files have been uploaded for reviewer ease. There are no sensitive keys in this repo and ths would not be done outside of a technical test
+- Warnings come from guardian's supplied code - have decided to leave it as they have on their github
+- Deprecation warnings are both being fixed in PR's in their respective repos, but are yet to make it live
+
+### Nice to haves if I had more time
+- Properly implemented pagination (All the logic is there - just need to apply next / last buttons)
+- Implement password reset / email confirmation
+- Have some more fun with fizz_buzz, random numbers etc...
