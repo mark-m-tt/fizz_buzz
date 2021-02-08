@@ -1,6 +1,8 @@
 GEM
+  remote: https://rubygems.org/
   specs:
     ast (2.4.2)
+    diff-lcs (1.4.4)
     dotenv (2.7.6)
     httparty (0.18.1)
       mime-types (~> 3.0)
@@ -15,6 +17,19 @@ GEM
     rainbow (3.0.0)
     regexp_parser (2.0.3)
     rexml (3.2.4)
+    rspec (3.10.0)
+      rspec-core (~> 3.10.0)
+      rspec-expectations (~> 3.10.0)
+      rspec-mocks (~> 3.10.0)
+    rspec-core (3.10.1)
+      rspec-support (~> 3.10.0)
+    rspec-expectations (3.10.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-mocks (3.10.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-support (3.10.2)
     rubocop (1.9.1)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
@@ -35,6 +50,7 @@ PLATFORMS
 DEPENDENCIES
   dotenv
   httparty
+  rspec
   rubocop
 
 BUNDLED WITH

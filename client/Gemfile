@@ -1,10 +1,16 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 # loading ENV vars
 gem 'dotenv'
+gem 'pry'
 
 # Code formatting. Read more: https://github.com/rubocop-hq/rubocop
 gem 'rubocop'
+gem 'rubocop-rspec'
 
 # performing HTTP requests. Read more: https://github.com/jnunemaker/httparty
 gem 'httparty'
+
+gem 'rspec'
