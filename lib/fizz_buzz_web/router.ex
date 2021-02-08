@@ -36,7 +36,6 @@ defmodule FizzBuzzWeb.Router do
 
     post "/sign-up", Api.UserController, :create, as: :api_user
     post "/sign-in", Api.SessionController, :create, as: :api_session
-    get "/", Api.HomeController, :play_fizz_buzz, as: :api_fizz_buzz
     get "/play", Api.GameController, :play, as: :api_play
   end
 

@@ -96,7 +96,7 @@ defmodule FizzBuzzWeb.Api.FavouriteControllerTest do
     } do
       favourite = insert(:favourite, user: user, number: 1)
       conn = delete(conn, Routes.api_favourite_path(conn, :delete, favourite))
-      assert json_response(conn, 204)
+      assert json_response(conn, 200)
     end
 
     test "when a favourite does not exist for the logged in user renders a 404", %{conn: conn} do

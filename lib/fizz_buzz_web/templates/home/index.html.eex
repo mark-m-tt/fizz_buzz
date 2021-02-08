@@ -20,7 +20,8 @@
     <% end %>
   </tr>
 
+  <% user = current_user(@conn) %>
   <%= for item <- @list do %>
-    <%= render "_number.html", item: item, conn: @conn, favourites: @favourites %>
+    <%= render "_number.html", item: item, conn: @conn, favourites: @favourites, user: user %>
   <% end %>
 </table>

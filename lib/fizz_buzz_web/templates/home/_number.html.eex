@@ -9,7 +9,7 @@
       <% else %>
         <td><%= "No" %></td>
         <td><%= form_for :favourite, Routes.favourite_path(@conn, :create), fn f -> %>
-          <%= hidden_input f, :user_id, value: current_user(@conn).id %>
+          <%= hidden_input f, :user_id, value: @user.id %>
           <%= hidden_input f, :number, value: @item.number %>
           <%= submit "Make favourite!" %>
         <% end %></td>

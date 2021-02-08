@@ -2,8 +2,6 @@ defmodule FizzBuzzWeb.Api.FavouriteController do
   use FizzBuzzWeb, :controller
 
   alias FizzBuzz.Accounts
-  alias FizzBuzz.Guardian
-  alias FizzBuzz.Repo
 
   def index(conn, _params) do
     conn
@@ -66,8 +64,8 @@ defmodule FizzBuzzWeb.Api.FavouriteController do
           Accounts.delete_favourite(favourite)
 
           conn
-          |> put_status(204)
-          |> render("index.json", favourites: user_from_jwt(conn).favourites)
+          |> put_status(200)
+          |> render("deleted.json")
         else
           render_not_found(conn)
         end

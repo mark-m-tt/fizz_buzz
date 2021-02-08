@@ -9,6 +9,10 @@ defmodule FizzBuzzWeb.Api.FavouriteView do
     %{favourite: favourite_json(favourite)}
   end
 
+  def render("deleted.json", _params) do
+    %{deleted: "true"}
+  end
+
   defp favourite_json(favourite) do
     %{
       id: favourite.id,
