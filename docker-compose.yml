@@ -31,6 +31,16 @@ services:
     restart: always
     volumes:
       - pgdata:/var/lib/postgresql/data
+  
+  client:
+    build:
+      context: ./client
+    depends_on:
+      - phoenix
+    environment:
+      APIBASEURL: ${APIBASEURL}
+    stdin_open: true
+    tty: true
       
 volumes:
   pgdata:

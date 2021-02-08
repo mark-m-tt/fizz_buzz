@@ -1,3 +1,5 @@
+source 'https://rubygems.org'
+
 # loading ENV vars
 gem 'dotenv'
 

@@ -19,7 +19,7 @@ class Client
   end
 
   def register(password_confirmation:)
-    url = "#{API_URL}/sign-up"
+    url = "#{API_URL}/sign_up"
     body = {
       user: {
         username: username,
@@ -57,7 +57,7 @@ class Client
   end
 
   def jwt
-    url = "#{API_URL}/sign-in"
+    url = "#{API_URL}/sign_in"
     body = {
       session: {
         username: username,

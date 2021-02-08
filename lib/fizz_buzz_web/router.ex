@@ -26,16 +26,16 @@ defmodule FizzBuzzWeb.Router do
     get "/", HomeController, :index
     resources "/accounts", UserController, except: [:index]
     resources "/favourites", FavouriteController, only: [:create, :delete]
-    get "/sign-in", SessionController, :new
-    post "/sign-in", SessionController, :create
+    get "/sign_in", SessionController, :new
+    post "/sign_in", SessionController, :create
     delete "/sign-out", SessionController, :delete
   end
 
   scope "/api/v1", FizzBuzzWeb do
     pipe_through :api
 
-    post "/sign-up", Api.UserController, :create, as: :api_user
-    post "/sign-in", Api.SessionController, :create, as: :api_session
+    post "/sign_up", Api.UserController, :create, as: :api_user
+    post "/sign_in", Api.SessionController, :create, as: :api_session
     get "/play", Api.GameController, :play, as: :api_play
   end
 
