@@ -4,7 +4,7 @@ Welcome to my Fizz Buzz application!
 
 ### Getting up and running
 
- - Clone the repo
+ - `$ git clone git@github.com:mark-m-tt/fizz_buzz.git`
  - `$ cd fizz_buzz`
  - `$ docker-compose build`
  - `$ docker-compose up`
